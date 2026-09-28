@@ -17,6 +17,7 @@ database/*.db
 
 # Scratch & Temporary files
 scratch/
+docs/.pdf_img_cache/
 
 # Junctions / Symlinks (source is dashboard/static)
 static
