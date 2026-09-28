@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MineSentinel AI - Safety Designed To Evolve</title>
+  
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- BubbledotICG-FinePos Font -->
+  <link href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="styles.css?v=5.0">
+
+  <!-- Instant Zero-FOUC Theme Application -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('mineSentinelTheme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+
+  <style>
+    @font-face {
+      font-family: "BubbledotICG-FinePos";
+      src: url("static/BubbledotICG-FinePos.woff2") format("woff2"),
+           url("/static/BubbledotICG-FinePos.woff2") format("woff2"),
+           url("static/BubbledotICG-FinePos.woff") format("woff"),
+           url("static/BubbledotICG-FinePos.ttf") format("truetype"),
+           url("/fonts/BubbledotICG-FinePos.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/8cb707a9b8a73f8a7403336b861c3074.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    .headline, .headline-line {
+      font-family: "BubbledotICG-FinePos", "Inter", monospace, sans-serif !important;
+      letter-spacing: 0.02em !important;
+    }
+
+    /* Theme Switcher Guarantee Styles */
+    .theme-switcher-wrapper {
+        position: relative !important;
+        display: inline-block !important;
+    }
+    @media (max-width: 768px) {
+        .theme-switcher-wrapper.desktop-only,
+        .desktop-only,
+        #landingThemeSwitcherWrapper {
+            display: none !important;
+        }
+    }
+    .theme-switch-btn {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: var(--text, #ffffff) !important;
+        border-radius: 999px !important;
+        padding: 5px 13px !important;
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 7px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+    }
+    .theme-switch-btn:hover {
+        background: rgba(255, 255, 255, 0.14) !important;
+        border-color: var(--accent-cyan, #00f2fe) !important;
+        box-shadow: 0 0 16px rgba(0, 242, 254, 0.25) !important;
+        transform: translateY(-1px) !important;
+    }
+    html[data-theme="normal"] .theme-switch-btn {
+        background: rgba(26, 36, 56, 0.85) !important;
+        border-color: rgba(148, 163, 184, 0.25) !important;
+        color: #f8fafc !important;
+    }
+    html[data-theme="light"] .theme-switch-btn {
+        background: #ffffff !important;
+        border-color: rgba(203, 213, 225, 0.9) !important;
+        color: #0f172a !important;
+    }
+    .theme-dropdown-panel {
+        display: none;
+        position: absolute !important;
+        top: calc(100% + 10px) !important;
+        right: 0 !important;
+        width: 275px !important;
+        background: rgba(13, 17, 28, 0.98) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 16px !important;
+        backdrop-filter: blur(28px) !important;
+        -webkit-backdrop-filter: blur(28px) !important;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6) !important;
+        padding: 8px !important;
+        z-index: 10000 !important;
+    }
+    html[data-theme="normal"] .theme-dropdown-panel {
+        background: rgba(20, 27, 43, 0.98) !important;
+        border-color: rgba(148, 163, 184, 0.22) !important;
+    }
+    html[data-theme="light"] .theme-dropdown-panel {
+        background: #ffffff !important;
+        border-color: rgba(203, 213, 225, 0.95) !important;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.16) !important;
+    }
+    .theme-dropdown-panel.open {
+        display: block !important;
+        animation: themeDropFade 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    }
+    @keyframes themeDropFade {
+        from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .theme-dropdown-header {
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.2px !important;
+        color: var(--muted, #94a3b8) !important;
+        padding: 8px 12px 6px 12px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        margin-bottom: 6px !important;
+    }
+    html[data-theme="light"] .theme-dropdown-header {
+        border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+    }
+    .theme-option-btn {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 9px 12px !important;
+        border-radius: 10px !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        color: var(--text, #ffffff) !important;
+        cursor: pointer !important;
+        text-align: left !important;
+        transition: all 0.18s ease !important;
+        margin-bottom: 3px !important;
+    }
+    .theme-option-btn:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+    html[data-theme="light"] .theme-option-btn:hover {
+        background: rgba(15, 23, 42, 0.05) !important;
+    }
+    .theme-option-btn.active {
+        background: rgba(0, 242, 254, 0.12) !important;
+        border-color: rgba(0, 242, 254, 0.35) !important;
+    }
+    html[data-theme="normal"] .theme-option-btn.active {
+        background: rgba(56, 189, 248, 0.14) !important;
+        border-color: rgba(56, 189, 248, 0.4) !important;
+    }
+    html[data-theme="light"] .theme-option-btn.active {
+        background: rgba(2, 132, 199, 0.1) !important;
+        border-color: rgba(2, 132, 199, 0.35) !important;
+    }
+    .theme-opt-left {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+    .theme-opt-left i {
+        font-size: 1.25rem !important;
+        flex-shrink: 0 !important;
+    }
+    .theme-opt-info {
+        display: flex !important;
+        flex-direction: column !important;
+        line-height: 1.25 !important;
+    }
+    .theme-opt-title {
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        color: var(--text, #ffffff) !important;
+    }
+    html[data-theme="light"] .theme-opt-title {
+        color: #0f172a !important;
+    }
+    .theme-opt-desc {
+        font-size: 0.68rem !important;
+        color: var(--muted, #94a3b8) !important;
+    }
+    .theme-check-icon {
+        font-size: 0.95rem !important;
+        color: var(--accent-cyan, #00f2fe) !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        display: none !important;
+        transition: opacity 0.15s ease !important;
+    }
+    .theme-option-btn.active .theme-check-icon {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: inline-block !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Full-viewport cover video (Fixed background) -->
+  <div class="bg">
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-dark-overlay"></div>
+  </div>
+
+  <!-- Offline / No Internet 404 Screen Overlay -->
+  <div class="offline-overlay hidden" id="offlineOverlay">
+    <div class="offline-card">
+      <div class="offline-icon"><i class="ph-fill ph-wifi-slash"></i></div>
+      <h1 class="offline-title">404 - Network Connection Lost</h1>
+      <p class="offline-text">Unable to establish a secure link to the MineSentinel AI network. Please verify your internet connection and try reconnecting.</p>
+      <button class="offline-btn" onclick="checkNetworkConnection()"><i class="ph-bold ph-arrows-clockwise"></i> Retry Connection</button>
+    </div>
+  </div>
+
+  <div class="page">
+    
+    <!-- 1) Header -->
+    <header class="header anim" style="--d: 0s">
+      <!-- Mobile Brand Bar -->
+      <a href="#hero" class="mobile-brand mobile-only" aria-label="MineSentinel AI Home">
+        <span class="mobile-brand-text">MineSentinel AI</span>
+      </a>
+
+      <!-- Desktop Nav Pill -->
+      <nav class="nav-pill desktop-only">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About Project</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#safety" class="nav-link">Safety Systems</a>
+      </nav>
+      
+      <!-- Theme Switcher Pill -->
+      <div class="theme-switcher-wrapper desktop-only" id="landingThemeSwitcherWrapper">
+        <button class="theme-switch-btn" id="landingThemeBtn" onclick="toggleLandingThemeDropdown(event)" title="Theme Mode (Dark / Normal / Light)">
+          <i class="ph-bold ph-moon-stars" id="landingThemeIcon" style="color: #00f2fe;"></i>
+          <span id="landingThemeLabel">Dark</span>
+          <i class="ph-bold ph-caret-down" style="font-size: 0.65rem; opacity: 0.7;"></i>
+        </button>
+        <div class="theme-dropdown-panel" id="landingThemeDropdownPanel">
+          <div class="theme-dropdown-header">Display Theme</div>
+          <button class="theme-option-btn active" data-theme-val="dark" onclick="selectLandingTheme('dark')">
+            <div class="theme-opt-left">
+              <i class="ph-fill ph-moon-stars" style="color: #00f2fe;"></i>
+              <div class="theme-opt-info">
+                <span class="theme-opt-title">Dark Mode</span>
+                <span class="theme-opt-desc">Obsidian Neon Midnight</span>
+              </div>
+            </div>
+            <i class="ph-bold ph-check theme-check-icon"></i>
+          </button>
+          <button class="theme-option-btn" data-theme-val="normal" onclick="selectLandingTheme('normal')">
+            <div class="theme-opt-left">
+              <i class="ph-fill ph-desktop" style="color: #38bdf8;"></i>
+              <div class="theme-opt-info">
+                <span class="theme-opt-title">Normal Mode</span>
+                <span class="theme-opt-desc">Industrial Control Slate</span>
+              </div>
+            </div>
+            <i class="ph-bold ph-check theme-check-icon"></i>
+          </button>
+          <button class="theme-option-btn" data-theme-val="light" onclick="selectLandingTheme('light')">
+            <div class="theme-opt-left">
+              <i class="ph-fill ph-sun" style="color: #f59e0b;"></i>
+              <div class="theme-opt-info">
+                <span class="theme-opt-title">Light Mode</span>
+                <span class="theme-opt-desc">Daylight Pearl Clarity</span>
+              </div>
+            </div>
+            <i class="ph-bold ph-check theme-check-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="sign-in-btn desktop-only" id="headerAuthBtn" onclick="openAuthModal()">Sign In</button>
+
+      <!-- Mobile Header Actions (Quick Theme Toggle + Hamburger) -->
+      <div class="mobile-header-actions mobile-only">
+        <button class="mobile-theme-quick-btn" onclick="cycleLandingTheme()" title="Switch Display Theme" aria-label="Switch Theme">
+          <i class="ph-bold ph-moon-stars" id="mobileHeaderThemeIcon"></i>
+        </button>
+        <button class="burger" aria-expanded="false" aria-label="Toggle menu">
+          <div class="burger-bars">
+            <span></span><span></span><span></span>
+          </div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay & Sheet -->
+    <div class="mobile-overlay hidden"></div>
+    <div class="mobile-sheet hidden">
+      <div class="mobile-sheet-header">
+        <div class="mobile-sheet-brand">
+          <span class="mobile-sheet-brand-name">MineSentinel AI</span>
+        </div>
+        <button class="mobile-sheet-close-btn" onclick="closeMenu()" aria-label="Close menu">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+
+      <nav class="mobile-nav">
+        <a href="#hero" class="nav-link active">
+          <i class="ph-bold ph-house"></i>
+          <span>Home</span>
+        </a>
+        <a href="#about" class="nav-link">
+          <i class="ph-bold ph-info"></i>
+          <span>About Project</span>
+        </a>
+        <a href="#architecture" class="nav-link">
+          <i class="ph-bold ph-cpu"></i>
+          <span>Architecture</span>
+        </a>
+        <a href="#safety" class="nav-link">
+          <i class="ph-bold ph-shield-check"></i>
+          <span>Safety Systems</span>
+        </a>
+        
+        <!-- High-End Segmented Appearance Selector -->
+        <div class="mobile-theme-section">
+          <div class="mobile-theme-header">
+            <span class="mobile-theme-label"><i class="ph-bold ph-paint-brush-broad"></i> APPEARANCE</span>
+            <span class="mobile-theme-badge" id="mobileThemeActiveTag">Dark Mode</span>
+          </div>
+          <div class="mobile-theme-segmented">
+            <button type="button" class="mobile-theme-btn active" data-theme-btn="dark" onclick="selectLandingTheme('dark')">
+              <i class="ph-fill ph-moon-stars"></i>
+              <span>Dark</span>
+            </button>
+            <button type="button" class="mobile-theme-btn" data-theme-btn="normal" onclick="selectLandingTheme('normal')">
+              <i class="ph-fill ph-desktop"></i>
+              <span>Normal</span>
+            </button>
+            <button type="button" class="mobile-theme-btn" data-theme-btn="light" onclick="selectLandingTheme('light')">
+              <i class="ph-fill ph-sun"></i>
+              <span>Light</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="sign-in-btn-mobile" id="mobileAuthBtn" onclick="openAuthModal()">
+          <i class="ph-bold ph-sign-in"></i>
+          <span>Sign In</span>
+        </button>
+      </nav>
+
+      <div class="mobile-sheet-footer">
+        <span class="mobile-compliance-badge">
+          <i class="ph-fill ph-shield-check"></i> DGMS & MSHA Safety Engine v2.7
+        </span>
+      </div>
+    </div>
+
+    <!-- 2) Hero -->
+    <main class="hero" id="hero">
+      
+      <h1 class="headline anim">
+        <span class="headline-line" style="--d: 0.12s">MineSentinel AI</span>
+        <span class="headline-line" style="--d: 0.3s">Safety Designed To Evolve</span>
+      </h1>
+
+      <p class="subhead anim" style="--d: 0.28s">
+        Next-generation AI monitoring platform engineered for hazardous underground and open-cast mining environments. Real-time telemetry, predictive hazard scoring, and instant life-saving emergency dispatches.
+      </p>
+
+      <div class="cta-wrapper anim" style="--d: 0.4s">
+        <button class="cta-btn" onclick="openAuthModal()">Get Started</button>
+        <a href="#about" class="cta-secondary-btn"><i class="ph-bold ph-info"></i> Learn More</a>
+      </div>
+      
+    </main>
+
+    <!-- 3) Detailed & Segmented About MineSentinel AI Section -->
+    <section class="about-detailed-section" id="about">
+      <div class="section-badge"><i class="ph-bold ph-shield-check"></i> Overview</div>
+      <h2 class="section-title">Comprehensive Underground Intelligence</h2>
+      <p class="section-lead">
+        MineSentinel AI bridges the gap between dangerous physical mining conditions and proactive industrial intelligence. By uniting hardware IoT telemetry with cloud deep learning, the platform detects micro-shifts in environmental toxicity, heat, and flame long before catastrophic failure occurs.
+      </p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="card-icon"><i class="ph-bold ph-cpu"></i></div>
+          <h3>Edge Telemetry Ingestion</h3>
+          <p>Continuous sampling of toxic gas concentration (MQ-2, MQ-7), ambient temperature, humidity (DHT11), and optical flame presence via ultra-low latency NodeMCU microcontrollers paired with 16-bit high-precision ADS1115 ADCs.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon"><i class="ph-bold ph-brain"></i></div>
+          <h3>AI Predictive Risk Engine</h3>
+          <p>Machine learning models continuously evaluate multi-parameter sensor arrays to calculate dynamic risk scores, identifying compound hazards like explosive gas accumulation and sudden carbon monoxide spikes.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon"><i class="ph-bold ph-warning-octagon"></i></div>
+          <h3>Autonomous Alarm Dispatch</h3>
+          <p>Instantaneous multi-channel siren triggers and visual notifications when environmental safety thresholds are breached, ensuring mine personnel receive immediate evacuation alerts.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="card-icon"><i class="ph-bold ph-chart-line-up"></i></div>
+          <h3>Live Telemetry Analytics</h3>
+          <p>Interactive real-time visualization dashboards featuring dynamic metric charts, active alert centers, system state monitoring, and automated safety audit logging.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) System Architecture & Hardware Segment -->
+    <section class="architecture-section" id="architecture">
+      <div class="section-badge"><i class="ph-bold ph-circuit-board"></i> System Architecture</div>
+      <h2 class="section-title">Hardware & Pipeline Specifications</h2>
+
+      <div class="spec-table-wrapper">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Component Layer</th>
+              <th>Implementation Role</th>
+              <th>Functional Capability</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Microcontroller</td>
+              <td>Low-Power Edge Node</td>
+              <td>WiFi-enabled edge data collection &amp; secure protocol transmission</td>
+            </tr>
+            <tr>
+              <td>Analog Precision</td>
+              <td>High-Resolution ADC Module</td>
+              <td>16-bit digital conversion for multi-channel gas sensor arrays</td>
+            </tr>
+            <tr>
+              <td>Environmental Sensing</td>
+              <td>Multi-Gas &amp; Thermal Sensors</td>
+              <td>Combustible gas, CO, temperature, humidity &amp; flame detection</td>
+            </tr>
+            <tr>
+              <td>Backend Infrastructure</td>
+              <td>Async API + Embedded DB + Message Broker</td>
+              <td>High-concurrency data ingestion, storage, &amp; API routing</td>
+            </tr>
+            <tr>
+              <td>AI Risk Model</td>
+              <td>Ensemble Machine Learning Classifier</td>
+              <td>Sub-millisecond risk prediction (Safe, Warning, Critical)</td>
+            </tr>
+            <tr>
+              <td>Analytics Frontend</td>
+              <td>Interactive Web Dashboard</td>
+              <td>Real-time telemetry visualization, alarm center &amp; status monitors</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5) Safety Protocol Segment -->
+    <section class="safety-section" id="safety">
+      <div class="section-badge"><i class="ph-bold ph-first-aid-kit"></i> Safety Standards</div>
+      <h2 class="section-title">Automated Incident Response Workflow</h2>
+      
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-num">01</div>
+          <h4>Sensor Sampling</h4>
+          <p>NodeMCU samples gas & thermal levels every 500ms.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">02</div>
+          <h4>Edge-to-Cloud Stream</h4>
+          <p>Telemetry data transmitted via MQTT to backend service.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">03</div>
+          <h4>AI Prediction</h4>
+          <p>AI model evaluates risk level (Safe, Warning, Critical).</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">04</div>
+          <h4>Emergency Dispatch</h4>
+          <p>Automatic siren, dashboard alert & safety protocol escalation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6) Stats footer -->
+    <footer class="stats-footer">
+      <div class="stat-item anim" style="--d: 0.66s">
+        <div class="stat-icon">*</div>
+        <div class="stat-value"><span class="count-up" data-target="24" data-decimals="0">0</span>/7</div>
+        <div class="stat-label">Autonomous Monitoring</div>
+      </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal-overlay hidden" id="authOverlay">
+      <div class="auth-modal">
+        <button class="auth-close" id="authCloseBtn" onclick="closeAuthModal()" aria-label="Close modal">&times;</button>
+        <h2 class="auth-title">MineSentinel AI</h2>
+
+        <!-- Theme Mode Switcher inside Login Interface -->
+        <div class="auth-theme-selector" id="authThemeSelector">
+          <span class="auth-theme-label"><i class="ph-bold ph-palette me-1"></i>Display Mode</span>
+          <div class="auth-theme-pills">
+            <button type="button" class="auth-theme-btn active" data-theme-btn="dark" onclick="selectLandingTheme('dark')" title="Dark Mode (Obsidian Neon)">
+              <i class="ph-fill ph-moon-stars"></i>
+              <span>Dark</span>
+            </button>
+            <button type="button" class="auth-theme-btn" data-theme-btn="normal" onclick="selectLandingTheme('normal')" title="Normal Mode (Industrial Slate)">
+              <i class="ph-fill ph-desktop"></i>
+              <span>Normal</span>
+            </button>
+            <button type="button" class="auth-theme-btn" data-theme-btn="light" onclick="selectLandingTheme('light')" title="Light Mode (Daylight Clarity)">
+              <i class="ph-fill ph-sun"></i>
+              <span>Light</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+          <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+        
+        <form id="landingLoginForm" class="auth-form active">
+          <div class="auth-group">
+            <label>Email address</label>
+            <input type="email" id="landingLoginEmail" placeholder="user@minesentinel.ai" required>
+          </div>
+          <div class="auth-group">
+            <label>Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="landingLoginPassword" placeholder="••••••••" required>
+              <i class="ph-fill ph-eye toggle-password" onclick="togglePasswordVisibility('landingLoginPassword', this)"></i>
+            </div>
+          </div>
+          <button type="submit" class="auth-submit">Login</button>
+        </form>
+
+        <form id="landingSignupForm" class="auth-form">
+          <div class="auth-group">
+            <label>Full Name</label>
+            <input type="text" id="landingSignupName" placeholder="John Doe" required>
+          </div>
+          <div class="auth-group">
+            <label>Email address</label>
+            <input type="email" id="landingSignupEmail" placeholder="user@minesentinel.ai" required>
+          </div>
+          <div class="auth-group">
+            <label>Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="landingSignupPassword" placeholder="••••••••" required>
+              <i class="ph-fill ph-eye toggle-password" onclick="togglePasswordVisibility('landingSignupPassword', this)"></i>
+            </div>
+          </div>
+          <button type="submit" class="auth-submit" style="background-color: #2b7a78;">Create Account</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="main.js?v=4.0"></script>
+</body>
+</html>

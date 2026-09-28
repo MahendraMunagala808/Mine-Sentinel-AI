@@ -1,0 +1,33 @@
+# Environment variables and secrets
+.env
+*.env
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+
+# Database files
+*.db
+database/*.db
+
+# Testing & Cache
+.pytest_cache/
+
+# Scratch & Temporary files
+scratch/
+
+# Junctions / Symlinks (source is dashboard/static)
+static
+
+# ML Models
+ml/models/*.joblib
+
+# ESP8266 build files
+firmware/esp8266/build/
+
+# Virtual Environment
+venv/
+env/
+

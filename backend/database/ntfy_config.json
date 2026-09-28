@@ -1,0 +1,9 @@
+{
+  "server_url": "https://ntfy.sh",
+  "topic": "minesentinel-alerts-2026",
+  "enabled": true,
+  "cooldown_seconds": 45,
+  "notify_on_warning": true,
+  "notify_on_critical": true,
+  "notify_on_recovery": true
+}

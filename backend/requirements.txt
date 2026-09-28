@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+paho-mqtt
+scikit-learn
+pandas
+numpy
+joblib
+python-dotenv
+jinja2
+reportlab
