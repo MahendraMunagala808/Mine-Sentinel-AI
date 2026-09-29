@@ -62,7 +62,7 @@ The system transforms traditional mine monitoring into an intelligent predictive
 | **4. Cloud & Backend Layer** | Python (FastAPI, Uvicorn, SQLAlchemy) | Ingests MQTT streams, evaluates thresholds, manages database persistence, and serves REST APIs. |
 | **5. AI Prediction Layer** | Random Forest (Scikit-learn) | Predicts environmental risk level (Safe, Warning, Critical) based on multi-variate sensor patterns. |
 | **6. Database Layer** | SQLite Database | Stores historical sensor telemetry, incident logs, node status, and device metadata. |
-| **7. Presentation Layer** | **React 18 + Vite App** & **SCADA Dashboard** & **16x2 LCD** | Triple interface: modern modular web app (Port 5173), embedded SCADA (Port 8000), and local mine LCD. |
+| **7. Presentation Layer** | **React 18 + Vite App** & **SCADA Dashboard** & **16x2 LCD** | Triple interface: modern modular web app (Port 3000), embedded SCADA (Port 8000), and local mine LCD. |
 | **8. Alert & Response Layer**| 16x2 LCD, LEDs, Buzzer, Relay Fan, **Ntfy Push**, **Shift PDF Audits** | Local physical alarms + autonomous exhaust fan + remote smartphone push alerts + compliance PDF reports. |
 
 ---
@@ -89,7 +89,7 @@ Mine Sentinel AI/
 │
 ├── dashboard/                             # Frontend Dashboards
 │   ├── package.json                       # React 18 & Vite build dependencies
-│   ├── vite.config.js                     # Vite build configuration (Port 5173)
+│   ├── vite.config.js                     # Vite build configuration (Port 3000)
 │   ├── index.html                         # SCADA Landing & Dashboard template
 │   ├── dashboard.html                     # Embedded SCADA operations view
 │   ├── main.js & styles.css               # Vanilla SCADA scripts & styles
@@ -155,6 +155,7 @@ Mine Sentinel AI/
 ## Quick Start
 Please refer to [`INSTRUCTIONS.md`](./INSTRUCTIONS.md) for the complete, step-by-step setup guide:
 1. **Start Backend**: `cd backend && python main.py` (Runs on `http://127.0.0.1:8000`)
-2. **Start React Frontend**: `cd dashboard && npm run dev` (Runs on `http://localhost:5173`)
+2. **Start React Frontend**: `cd dashboard && npm run dev` (Runs on `http://localhost:3000`)
 3. **Run Simulator**: `python simulator/simulator.py` (Tests full pipeline without hardware)
 4. **Detailed Wiring**: See [`docs/hardware_wiring.md`](./docs/hardware_wiring.md)
+

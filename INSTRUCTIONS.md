@@ -46,7 +46,7 @@ Here is how data flows through the entire system from the physical mine shaft to
                                                                            ┌───────────────────────┴───────────────────────┐
                                                                            v                                               v
                                                           [ React 18 + Vite Industrial App ]             [ Embedded SCADA Dashboard ]
-                                                              (http://localhost:5173)                       (http://127.0.0.1:8000)
+                                                              (http://localhost:3000)                       (http://127.0.0.1:8000)
 ```
 
 ---
@@ -140,7 +140,7 @@ npm install
 npm run dev
 ```
 2. Open your browser and navigate to:
-   👉 [**http://localhost:5173**](http://localhost:5173)
+   👉 [**http://localhost:3000**](http://localhost:3000)
 
 ---
 
@@ -157,7 +157,7 @@ Simply open your web browser and navigate to:
 ## 5. Phase 3: Advanced Safety Features
 
 ### 1. Interactive AI Mine Safety Copilot (`<CopilotChat />`)
-- **How to access:** In the React dashboard ([http://localhost:5173](http://localhost:5173)), click the **AI Copilot** floating button or panel in the header.
+- **How to access:** In the React dashboard ([http://localhost:3000](http://localhost:3000)), click the **AI Copilot** floating button or panel in the header.
 - **Capabilities:**
   - Ask live safety questions: *"What is the current risk level in Sector 3?"*
   - Emergency protocols: *"What should miners do if CO crosses 50 ppm?"*
@@ -365,7 +365,7 @@ The new model is automatically saved to `ml/models/random_forest_model.joblib`.
 
 - **Q: Dashboard shows `--` for all sensor values.**
   - *Fix:* Ensure Terminal 1 (Backend) is running. If you don't have hardware connected yet, run the simulator in Terminal 3 (`python simulator\simulator.py`).
-- **Q: React dashboard fails to load at `http://localhost:5173`.**
+- **Q: React dashboard fails to load at `http://localhost:3000`.**
   - *Fix:* Make sure you ran `npm install` inside the `dashboard/` directory and launched Vite with `npm run dev`. Ensure the backend is running on `http://127.0.0.1:8000`.
 - **Q: ESP32 will not connect to WiFi.**
   - *Fix:* The ESP32 2.4 GHz radio requires a **2.4 GHz WiFi network**. Make sure your home router or mobile hotspot is set to 2.4 GHz (not 5 GHz only).
@@ -391,7 +391,7 @@ python main.py
 # 2. Start React 18 + Vite Dashboard (Terminal 2)
 cd "c:\Users\munag\OneDrive\Desktop\Mine sentinel ai\dashboard"
 npm run dev
-# -> React App: http://localhost:5173
+# -> React App: http://localhost:3000
 
 # 3. Start Hardware Simulator (Terminal 3, Optional)
 cd "c:\Users\munag\OneDrive\Desktop\Mine sentinel ai"

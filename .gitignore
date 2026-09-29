@@ -32,3 +32,9 @@ firmware/esp8266/build/
 venv/
 env/
 
+# Node / Frontend Build
+node_modules/
+dist/
+dashboard/dist/
+
+
