@@ -3,14 +3,6 @@
 **Batch No:** WI 12  
 **Domain:** EDGE IOT + INDUSTRIAL IOT (IIOT) + MACHINE LEARNING + PREDICTIVE ANALYTICS  
 
-## Team Members
-| Roll Number | Name of the student |
-| :--- | :--- |
-| 2373A35158 | MUNAGALA MAHENDRA |
-| 2373A35150 | SHAIK HAMEED |
-| 2373A35193 | SHAIK GAFFAR |
-| 2373A35194 | THALAMANCHI MANIDEEP |
-
 ---
 
 ## Abstract
